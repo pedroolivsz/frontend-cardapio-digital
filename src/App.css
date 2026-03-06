@@ -1,28 +1,78 @@
 .container {
+  min-height: 100vh;
+  padding: 40px 24px;
+
+  background: #f1f5f9;
+
   display: flex;
-  align-items: center;
   flex-direction: column;
-  justify-content: center;
-  width: 100vw;
+  gap: 40px;
 }
 
-.card-grip {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
+.header {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.container button {
-  background-color: #0275d8;
+.header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.header p {
+  color: #64748b;
+  margin-top: 6px;
+}
+
+.btn-create {
+  background: #2563eb;
   color: white;
-  font-weight: bold;
-  position: fixed;
-  bottom: 16px;
-  right: 24px;
-  transition: all 0.1s linear 0.1s;
+
+  border: none;
+  padding: 12px 20px;
+
+  border-radius: 10px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
 }
 
-.container button:hover {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 7px 0px;
-  transform: scale(1.1);
+.btn-create:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content h1 {
+  text-align: center;
+}
+
+.container h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #1a1a1a;
+}
+
+.card-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+  gap: 24px;
 }
