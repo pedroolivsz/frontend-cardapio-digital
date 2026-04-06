@@ -1,0 +1,65 @@
+.filtro {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 12px 6px;
+  margin-bottom: 16px;
+
+  scrollbar-width: none;
+}
+
+.filtro::-webkit-scrollbar {
+  display: none;
+}
+
+.filtro button {
+  border: none;
+  background: #ffe5e7;
+  color: #c1121f;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 14px;
+
+  transition: all 0.2s ease;
+}
+
+.filtro button:hover {
+  background: #ffd6da;
+  transform: translateY(-1px);
+}
+
+.filtro button.active {
+  background: #e63946;
+  color: white;
+  font-weight: 600;
+
+  box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+}
+
+.filtro button:active {
+  transform: scale(0.95);
+}
+
+.filtro button:first-child {
+  margin-left: 4px;
+}
+
+.filtro button:last-child {
+  margin-right: 4px;
+}
+
+.button {
+  border: none;
+  background: #ffe5e7;
+  color: #c1121f;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}

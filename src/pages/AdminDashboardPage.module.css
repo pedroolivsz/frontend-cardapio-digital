@@ -1,0 +1,44 @@
+.container {
+    padding: 24px;
+    background: #F8FAFC;
+    min-height: 100vh;
+}
+
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.card {
+    background: #FFFFFF;
+    padding: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+}
+
+.card h3 {
+    color: #6B7280;
+    font-size: 14px;
+}
+
+.card p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #111827;
+}
+
+.section {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    margin-bottom: 16px;
+}
+
+.alert {
+    color: #DC2626;
+    font-weight: 500;
+}
