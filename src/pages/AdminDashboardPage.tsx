@@ -6,6 +6,20 @@ import styles from "./AdminDashboardPage.module.css"
 import type { Order } from "../types/Order";
 import type { Product } from "../types/Product";
 
+const STATUS_LABEL: Record<string, string> = {
+    RECEIVED: "Recebido",
+    PREPARING: "Preparando",
+    DELIVERED: "Entregue",
+    CANCELLED: "Cancelado"
+};
+
+const STATUS_BADGE: Record<string, string> = {
+    RECEIVED: "badgeReceived",
+    PREPARING: "badgePreparing",
+    DELIVERED: "badgeDelivered",
+    CANCELLED: "badgeCancelled"
+};
+
 export default function AdminDashboardPage() {
     const [orders, setOrders] = useState<Order[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
@@ -26,65 +40,102 @@ export default function AdminDashboardPage() {
     const totalOrders = orders.length;
 
     const revenue = orders
-    .filter(o => o.status !== "CANCELLED")
+    .filter((o) => o.status !== "CANCELLED")
     .reduce((sum, o) => sum + Number(o.total), 0);
 
-    const pendingOrders = orders.filter(o =>
+    const pendingOrders = orders.filter((o) =>
         o.status === "RECEIVED" || o.status === "PREPARING"
     ).length;
 
-    const deliveredOrders = orders.filter(o =>
+    const deliveredOrders = orders.filter((o) =>
         o.status === "DELIVERED"
     ).length;
 
-    const outOfStock = products.filter(p => p.stock === 0);
+    const outOfStock = products.filter((p) => p.stock === 0);
+
+    const today = new Date().toLocaleDateString("pt-BR", {
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+    });
 
     return (
         <div className={styles.container}>
-            <h1>Dashboard</h1>
+            <div className={styles.header}>
+                <h1>Dashboard</h1>
+                <span className={styles.date}>{today}</span>
+            </div>
 
             <div className={styles.kpis}>
-                <div className={styles.card}>
-                    <h3>Faturamento</h3>
-                    <p>R$ ${revenue.toFixed(2)}</p>
+                <div className={`${styles.kcard} ${styles.kcardGreen}`}>
+                    <h3 className={styles.kcardLabel}>Faturamento</h3>
+                    <p className={styles.kcardValue}>
+                        R$ {revenue.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                    </p>
+                    <p className={styles.kcardSub}>Pedidos concluídos</p>
                 </div>
 
-                <div className={styles.card}>
-                    <h3>Pedidos</h3>
-                    <p>{totalOrders}</p>
+                <div className={`${styles.kcard} ${styles.kcardBlue}`}>
+                    <h3 className={styles.kcardLabel}>Pedidos</h3>
+                    <p className={styles.kcardValue}>{totalOrders}</p>
+                    <p className={styles.kcardSub}>Todos os status</p>
                 </div>
 
-                <div className={styles.card}>
-                    <h3>Pendentes</h3>
-                    <p>{pendingOrders}</p>
+                <div className={`${styles.kcard} ${styles.kcardAmber}`}>
+                    <h3 className={styles.kcardLabel}>Pendentes</h3>
+                    <p className={styles.kcardValue}>{pendingOrders}</p>
+                    <p className={styles.kcardSub}>Recebidos + em preparo</p>
                 </div>
 
-                <div className={styles.card}>
-                    <h3>Entregues</h3>
-                    <p>{deliveredOrders}</p>
+                <div className={`${styles.kcard} ${styles.kcardTeal}`}>
+                    <h3 className={styles.kcardLabel}>Entregues</h3>
+                    <p className={styles.kcardValue}>{deliveredOrders}</p>
+                    <p className={styles.kcardSub}>Finalizados com sucesso</p>
                 </div>
             </div>
 
-            <div className={styles.section}>
-                <h2>Últimos pedidos</h2>
-                {orders.slice(0, 5).map(order => (
-                    <div key={order.id} className={styles.orderItem}>
-                        #{order.id} - {order.customerName} - R$ {Number(order.total).toFixed(2)}
+            <div className={styles.grid2}>
+                <div className={styles.panel}>
+                    <h2>Últimos pedidos</h2>
+                    {orders.slice(0, 5).map((order) => (
+                    <div key={order.id} className={styles.orderRow}>
+                        <span className={styles.orderId}>#{order.id}</span>
+                        <span className={styles.orderName}>{order.customerName}</span>
+                        <span className={`${styles.badge} ${
+                            styles[STATUS_BADGE[order.status] ?? "badgeReceived"]
+                        }`}>
+                            {STATUS_LABEL[order.status] ?? order.status}
+                        </span>
+                        <span className={styles.orderTotal}>
+                            R${" "}
+                            {Number(order.total).toLocaleString("pt-BR", {
+                                minimumFractionDigits: 2
+                            })}
+                        </span>
                     </div>
-                ))}
-            </div>
-
-            <div className={styles.section}>
-                <h2>Atenção!</h2>
-
-                {outOfStock.length === 0
-                ? (<p>Sem problemas no momento</p>)
-                : (outOfStock.map(p => (
-                    <div key={p.id} className={styles.alert}>
-                        {p.title} sem estoque
-                    </div>
-                ))
-            )}
+                    ))}
+                </div>
+                
+                <div className={styles.panel}>
+                    <h2>Alertas de estoque</h2>
+                    {outOfStock.length === 0
+                    ? (
+                    <div className={styles.okState}>
+                        <span className={styles.okDot}>
+                            Sem problemas no momento
+                        </span>
+                    </div>)
+                    : (
+                        outOfStock.map((p) => (
+                        <div key={p.id} className={styles.alertItem}>
+                            <span className={styles.alertDot} />
+                            <span className={styles.alertTex}>{p.title}</span>
+                            <span className={styles.alertTag}>Sem estoque</span>
+                        </div>
+                    ))
+                    )}
+                </div>
             </div>
         </div>
     );

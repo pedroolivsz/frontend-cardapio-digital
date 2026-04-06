@@ -1,44 +1,232 @@
 .container {
-    padding: 24px;
+    padding: 28px;
     background: #F8FAFC;
     min-height: 100vh;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+}
+
+.header h1 {
+    font-size: 22px;
+    font-weight: 500;
+    color: #111827;
+    margin: 0;
+}
+
+.date {
+  font-size: 13px;
+  color: #9ca3af;
+  text-transform: capitalize;
+}
+
 .kpis {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
-.card {
+.kcard {
     background: #FFFFFF;
-    padding: 16px;
-    padding: 16px;
+    padding: 16px 18px;
     border-radius: 12px;
     border: 1px solid #E5E7EB;
+    position: relative;
+    overflow: hidden;
 }
 
-.card h3 {
-    color: #6B7280;
-    font-size: 14px;
+.kcard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
 }
 
-.card p {
-    font-size: 22px;
-    font-weight: bold;
-    color: #111827;
+.kcardGreen::before  { background: #3b6d11; }
+.kcardBlue::before   { background: #185fa5; }
+.kcardAmber::before  { background: #854f0b; }
+.kcardTeal::before   { background: #0f6e56; }
+
+.kcardLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: #6b7280;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
 }
 
-.section {
-    background: white;
+.kcardValue {
+  font-size: 26px;
+  font-weight: 500;
+  color: #111827;
+  line-height: 1;
+  margin: 0 0 6px;
+}
+
+.kcardSub {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.panel h2 {
+  font-size: 15px;
+  font-weight: 500;
+  color: #111827;
+  margin: 0 0 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.orderRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.orderRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.orderId {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca3af;
+  min-width: 36px;
+}
+
+.orderName {
+  font-size: 14px;
+  color: #374151;
+  flex: 1;
+}
+
+.orderTotal {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  min-width: 86px;
+  text-align: right;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.badgeReceived  { background: #e6f1fb; color: #185fa5; }
+.badgePreparing { background: #faeeda; color: #854f0b; }
+.badgeDelivered { background: #eaf3de; color: #3b6d11; }
+.badgeCancelled { background: #fcebeb; color: #a32d2d; }
+
+.alertItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.alertItem:last-child {
+  border-bottom: none;
+}
+
+.alertDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e24b4a;
+  flex-shrink: 0;
+}
+
+.alertText {
+  font-size: 14px;
+  color: #374151;
+  flex: 1;
+}
+
+.alertTag {
+  font-size: 11px;
+  font-weight: 500;
+  background: #fcebeb;
+  color: #a32d2d;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+
+.okState {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.okDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #639922;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
     padding: 16px;
-    border-radius: 12px;
-    border: 1px solid #E5E7EB;
-    margin-bottom: 16px;
+  }
+ 
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+ 
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+ 
+  .grid2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-.alert {
-    color: #DC2626;
-    font-weight: 500;
+@media (max-width: 480px) {
+  .kpis {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
