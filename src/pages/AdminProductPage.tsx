@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
 import { deleteProduct, getProducts } from "../services/ProductService";
-import styles from "./AdminPage.module.css"
+import styles from "./AdminProductPage.module.css"
 import { useNavigate } from "react-router-dom";
 
-export default function AdminPage() {
+export default function AdminProductPage() {
     const navigate = useNavigate();
 
     const [products, setProducts] = useState<Product[]>([]);
