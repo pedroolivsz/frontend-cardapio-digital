@@ -176,10 +176,28 @@ export default function AdminOrdersPage() {
 
     return (
         <div>
-            <div className={styles.navbar}>
-                <button onClick={() => navigate("/admin")}>Produtos</button>
-                <button onClick={() => navigate("/admin/orders")}>Pedidos</button>
-            </div>
+            <nav className={styles.nav}>
+                <button
+                    className={styles.navBtn}
+                    onClick={() => navigate("/admin/dashboard")}
+                >
+                    Dashboard
+                </button>
+
+                <button
+                    className={styles.navBtn}
+                    onClick={() => navigate("/admin")}
+                >
+                    Produtos
+                </button>
+
+                <button
+                    className={`${styles.navBtn} ${styles.navBtnActive}`}
+                    onClick={() => navigate("/admin/orders")}
+                >
+                    Pedidos
+                </button>
+            </nav>
 
             <h1>Pedidos</h1>
 

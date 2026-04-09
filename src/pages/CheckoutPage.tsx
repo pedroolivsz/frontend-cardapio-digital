@@ -50,11 +50,6 @@ export default function CheckoutPage() {
         try {
             setLoading(true);
 
-            const items = cart.map(item => ({
-                foodId: item.id,
-                quantity: item.quantity
-            }));
-
             await createOrder({
                 customerName: form.nome,
                 customerPhone: form.telefone.replace(/\D/g, ""),
@@ -62,55 +57,17 @@ export default function CheckoutPage() {
                 observation: form.observacao,
                 paymentMethod: form.metodoDePagamento,
                 changeFor: form.troco,
-                items: items
+                items: cart.map(item => ({
+                    foodId: item.id,
+                    quantity: item.quantity
+                }))
             });
-
-            const itemsText = cart.map(item => {
-                return `• ${item.title}  (${item.quantity}x) - R$ ${(item.quantity * item.price).toFixed(2)}`;
-            }).join("\n");
-
-            const pagamentoTexto = {
-                CASH: "Dinheiro",
-                PIX: "Pix",
-                CREDIT_CARD: "Cartão de Crédito",
-                DEBIT_CARD: "Cartão de Débito"
-            };
-
-            const mensagem = `
-*NOVO PEDIDO*
-
-*Cliente:* ${form.nome}
-*Telefone:* ${form.telefone}
-*Entrega:* ${form.endereco}
-
-*Pagamento:* ${pagamentoTexto[form.metodoDePagamento as keyof typeof pagamentoTexto]}
-
-${form.metodoDePagamento === "CASH" && form.troco
-    ? `Troco: R$ ${Number(form.troco).toFixed(2)}`
-    : ""
-}
-
-${form.observacao ? `*Observação:* ${form.observacao}` : ""}
-
-━━━━━━━━━━━━━━━
-*Itens do pedido:*
-${itemsText}
-
-━━━━━━━━━━━━━━━
-*Total:* ${total.toFixed(2)}
-        `;
-
-            const numero = "5588999776140"
-            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-
-            window.open(url, "_blank");
 
             clearCart();
             setSuccess(true);
 
             setTimeout(() => {
                 navigate("/")
-
                 setLoading(false);
                 setSuccess(false);
             }, 1200);
@@ -200,7 +157,7 @@ ${itemsText}
 
                 {success && (
                     <p className={styles.success}>
-                        Redirecinando para o WhatsApp...
+                        Pedido realizado! Você receberá uma confirmação no WhatsApp.
                     </p>
                 )}
             </form>

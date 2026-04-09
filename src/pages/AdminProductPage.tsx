@@ -36,6 +36,13 @@ export default function AdminProductPage() {
         <div className={styles.page}>
             <nav className={styles.nav}>
                 <button
+                    className={styles.navBtn}
+                    onClick={() => navigate("/admin/dashboard")}
+                >
+                    Dashboard
+                </button>
+                
+                <button
                     className={`${styles.navBtn} ${styles.navBtnActive}`}
                     onClick={() => navigate("/admin")}
                 >
@@ -92,7 +99,7 @@ export default function AdminProductPage() {
                             className={styles.addBtn}
                             style={{ margin: "16px auto 0", display: "flex" }}
                             onClick={() => navigate("/admin/create")}>
-                            Adicionar primeiro produto.
+                            Adicionar primeiro produto
                         </button>
                     </div>
                 ) : (

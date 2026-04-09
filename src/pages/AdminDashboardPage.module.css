@@ -4,6 +4,41 @@
     min-height: 100vh;
 }
 
+.nav {
+    display: flex;
+    gap: 6px;
+    padding: 12px 28px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.navBtn {
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.navBtn:hover {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.navBtnActive {
+    background: #e6f1fb;
+    color: #185fa5;
+    border-color: #b5d4f4;
+}
+
+.navBtnActive:hover {
+    background: #dbeafe;
+}
+
 .header {
     display: flex;
     justify-content: space-between;

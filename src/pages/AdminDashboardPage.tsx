@@ -5,6 +5,7 @@ import { getProducts } from "../services/ProductService";
 import styles from "./AdminDashboardPage.module.css"
 import type { Order } from "../types/Order";
 import type { Product } from "../types/Product";
+import { useNavigate } from "react-router-dom";
 
 const STATUS_LABEL: Record<string, string> = {
     RECEIVED: "Recebido",
@@ -23,6 +24,7 @@ const STATUS_BADGE: Record<string, string> = {
 export default function AdminDashboardPage() {
     const [orders, setOrders] = useState<Order[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fatch = async () => {
@@ -62,6 +64,29 @@ export default function AdminDashboardPage() {
 
     return (
         <div className={styles.container}>
+            <nav className={styles.nav}>
+                <button
+                    className={`${styles.navBtn} ${styles.navBtnActive}`}
+                    onClick={() => navigate("/admin/dashboard")}
+                >
+                    Dashboard
+                </button>
+
+                <button
+                    className={styles.navBtn}
+                    onClick={() => navigate("/admin")}
+                >
+                    Produtos
+                </button>
+
+                <button
+                    className={styles.navBtn}
+                    onClick={() => navigate("/admin/orders")}
+                >
+                    Pedidos
+                </button>
+            </nav>
+
             <div className={styles.header}>
                 <h1>Dashboard</h1>
                 <span className={styles.date}>{today}</span>

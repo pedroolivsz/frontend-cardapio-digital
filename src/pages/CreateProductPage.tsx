@@ -107,8 +107,8 @@ export default function CreateProductPage() {
                     value={form.categoryId}
                     onChange={e => handleChange("categoryId", e.target.value)}>
                         <option value="">Selecione uma categoria</option>
-                        <option value="1">Haburgue</option>
-                        <option value="2">Pizzas</option>
+                        <option value="1">Pizzas</option>
+                        <option value="2">Hambúrgueres</option>
                 </select>
 
                 <input
