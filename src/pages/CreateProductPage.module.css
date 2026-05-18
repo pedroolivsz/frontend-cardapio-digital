@@ -92,3 +92,30 @@
 .actions button:last-child:active {
   transform: scale(0.97);
 }
+
+.btnNewCategory {
+    background: none;
+    border: 1px dashed #aaa;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-align: left;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.btnNewCategory:hover {
+    border-color: #555;
+    color: #333;
+}
+
+.newCategoryRow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.newCategoryRow input {
+    flex: 1;
+}

@@ -9,9 +9,12 @@ import ProductSkeleton from "../components/ProductSkeleton";
 
 import type { Product } from "../types/Product";
 import styles from "./HomePage.module.css"
+import type { Category } from "../types/Category";
+import { getCategory } from "../services/CategoryService";
 
 export default function Home() {
     const [products, setProducts] = useState<Product[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const [category, setCategory] = useState<string>("Todas");
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
@@ -24,10 +27,14 @@ export default function Home() {
     }, 0);
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchData = async () => {
         try {
-            const data = await getProducts();
+            const [data, cats] = await Promise.all([
+                getProducts(),
+                getCategory()
+            ]);
             setProducts(data);
+            setCategories(cats);
         } catch (err) {
             console.error("Erro real: ", err);
             setError(true);
@@ -36,7 +43,7 @@ export default function Home() {
         }
     };
 
-        fetchProducts();
+        fetchData();
     }, [])
 
     if(loading) {
@@ -54,10 +61,7 @@ export default function Home() {
     
     if(error) return <p>Erro ao carregar produtos</p>
 
-    const categories = [
-        "Todas",
-        ...new Set(products.map(p => p.category))
-    ]
+    const categoryNames = ["Todas", ...categories.map(c => c.name)];
 
     const productsFiltered = 
         category === "Todas"
@@ -91,7 +95,7 @@ export default function Home() {
             </div>
             
             <CategoryFilter 
-            categories = {categories}
+            categories = {categoryNames}
             setCategory = {setCategory}
             activeCategory = {category}/>
 

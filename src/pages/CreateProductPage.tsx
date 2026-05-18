@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "./CreateProductPage.module.css"
 import { createProduct, updateProduct } from "../services/ProductService";
 import { api } from "../services/api";
+import type { Category } from "../types/Category";
+import { createCategory, getCategory } from "../services/CategoryService";
 
 export default function CreateProductPage() {
     const navigate = useNavigate();
@@ -19,6 +21,15 @@ export default function CreateProductPage() {
         price: "",
         stock: ""
     });
+
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [newCategoryName, setNewCategoryName] = useState("");
+    const [showNewCategory, setShowNewCategory] = useState(false);
+    const [creatingCategory, setCreatingCategory] = useState(false);
+
+    useEffect(() => {
+        getCategory().then(setCategories);
+    }, []);
 
     useEffect(() => {
         if(isEdit) {
@@ -39,6 +50,24 @@ export default function CreateProductPage() {
 
     const handleChange = (field: string, value: string) => {
         setForm(prev => ({  ...prev, [field]: value }))
+    };
+
+    const handleCreateCategory = async () => {
+        if(!newCategoryName.trim()) return;
+
+        setCreatingCategory(true);
+        try {
+            const created = await createCategory(newCategoryName.trim());
+            setCategories(prev => ({...prev, created}));
+            setForm(prev => ({ ...prev, categoryId: String(created.id) }));
+            setNewCategoryName("");
+            setShowNewCategory(false);
+        } catch (error) {
+            console.error(error);
+            alert("Erro ao criar categoria");
+        } finally {
+            setCreatingCategory(false)
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -107,9 +136,48 @@ export default function CreateProductPage() {
                     value={form.categoryId}
                     onChange={e => handleChange("categoryId", e.target.value)}>
                         <option value="">Selecione uma categoria</option>
-                        <option value="1">Pizzas</option>
-                        <option value="2">Hambúrgueres</option>
+                        {categories.map(cat => (
+                            <option key={cat.id} value={cat.id}>
+                                {cat.name}
+                            </option>
+                        ))}
                 </select>
+
+                {!showNewCategory ? (
+                    <button
+                        type="button"
+                        className={styles.btnNewCategory}
+                        onClick={() => setShowNewCategory(true)}
+                    >
+                        + Nova Categoria
+                    </button>
+                ) : (
+                    <div className={styles.newCategoryRow}>
+                        <input
+                            type="text"
+                            placeholder="Nova categoria"
+                            value={newCategoryName}
+                            onChange={e => setNewCategoryName(e.target.value)}
+                            onKeyDown={e => e.key === "Enter" && (e.preventDefault(), handleCreateCategory())}
+                            autoFocus
+                        />
+
+                        <button
+                            type="button"
+                            onClick={handleCreateCategory}
+                            disabled={creatingCategory || !newCategoryName.trim()}
+                        >
+                            {creatingCategory ? "Criando..." : "Criar"}
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => {setShowNewCategory(false); setNewCategoryName(""); }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                )}
 
                 <input
                     type="text" 
