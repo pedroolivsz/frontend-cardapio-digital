@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useCart } from "../context/CartContext";
-import styles from "./CheckoutPage.module.css"
+import { useCart } from "../../context/CartContext";
+import styles from "./checkoutPage.module.css"
 import { useNavigate } from "react-router-dom";
-import { createOrder } from "../services/OrderService";
+import { createOrder } from "../../services/orderService";
 
 
 export default function CheckoutPage() {

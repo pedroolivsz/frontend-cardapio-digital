@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import styles from "./CreateProductPage.module.css"
-import { createProduct, updateProduct } from "../services/ProductService";
-import { api } from "../services/api";
-import type { Category } from "../types/Category";
-import { createCategory, getCategory } from "../services/CategoryService";
+import styles from "./createProductPage.module.css"
+import { createProduct, updateProduct } from "../../services/productService";
+import { api } from "../../services/api";
+import type { Category } from "../../types/category";
+import { createCategory, getCategory } from "../../services/categoryService";
 
 export default function CreateProductPage() {
     const navigate = useNavigate();

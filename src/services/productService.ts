@@ -1,6 +1,6 @@
 import { api } from "./api"
-import type { Product } from "../types/Product"
-import type { Category } from "../types/Category"
+import type { Product } from "../types/product"
+import type { Category } from "../types/category"
 
 export const getProducts = async (): Promise<Product[]> => {
     const [productsRes, categoriesRes] = await Promise.all([

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type { Product } from "../types/Product";
-import { deleteProduct, getProducts } from "../services/ProductService";
-import styles from "./AdminProductPage.module.css"
+import type { Product } from "../../types/product";
+import { deleteProduct, getProducts } from "../../services/productService";
+import styles from "./productPage.module.css"
 import { useNavigate } from "react-router-dom";
 
 export default function AdminProductPage() {

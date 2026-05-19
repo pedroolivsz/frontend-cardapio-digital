@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom"
-import Home from "./pages/HomePage"
-import CartPage from "./pages/CartPage"
-import CheckoutPage from "./pages/CheckoutPage"
-import AdminProductPage from "./pages/AdminProductPage"
-import CreateProductPage from "./pages/CreateProductPage"
-import AdminOrdersPage from "./pages/AdminOrdersPage"
-import AdminDashboardPage from "./pages/AdminDashboardPage"
+import Home from "./pages/store/homePage"
+import CartPage from "./pages/store/cartPage"
+import CheckoutPage from "./pages/store/checkoutPage"
+import AdminProductPage from "./pages/admin/productPage"
+import CreateProductPage from "./pages/admin/createProductPage"
+import AdminOrdersPage from "./pages/admin/ordersPage"
+import AdminDashboardPage from "./pages/admin/dashboardPage"
 
 function App() {
   return (

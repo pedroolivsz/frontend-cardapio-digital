@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getOrders } from "../services/OrderService";
-import { getProducts } from "../services/ProductService";
+import { getOrders } from "../../services/orderService";
+import { getProducts } from "../../services/productService";
 
-import styles from "./AdminDashboardPage.module.css"
-import type { Order } from "../types/Order";
-import type { Product } from "../types/Product";
+import styles from "./dashboardPage.module.css"
+import type { Order } from "../../types/order";
+import type { Product } from "../../types/product";
 import { useNavigate } from "react-router-dom";
 
 const STATUS_LABEL: Record<string, string> = {

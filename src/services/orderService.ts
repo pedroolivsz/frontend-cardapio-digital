@@ -1,4 +1,4 @@
-import type { Order } from "../types/Order";
+import type { Order } from "../types/order";
 import { api } from "./api";
 
 export const createOrder = async (order: {

@@ -1,5 +1,5 @@
-import type { Product } from "../types/Product";
-import { useCart } from "../context/CartContext";
+import type { Product } from "../../../types/product";
+import { useCart } from "../../../context/CartContext";
 import styles from "./ProductCard.module.css"
 
 type ProductCardProps = {

@@ -1,6 +1,6 @@
-import { useCart } from "../context/CartContext";
+import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
-import styles from "./CartPage.module.css"
+import styles from "./cartPage.module.css"
 
 export default function CartPage() {
     const {cart, removeFromCart, decreaseQuantity, increaseQuantity } = useCart();

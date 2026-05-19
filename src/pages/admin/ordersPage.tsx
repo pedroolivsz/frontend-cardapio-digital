@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import type { Order } from "../types/Order";
-import { getOrders, updateOrderStatus } from "../services/OrderService";
+import type { Order } from "../../types/order";
+import { getOrders, updateOrderStatus } from "../../services/orderService";
 import { useNavigate } from "react-router-dom";
-import styles from "./AdminOrdersPage.module.css"
+import styles from "./ordersPage.module.css"
 
 import { Client } from "@stomp/stompjs"
 

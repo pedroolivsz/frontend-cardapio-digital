@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../../context/CartContext";
 
-import { getProducts } from "../services/ProductService";
-import ProductCard from "../components/ProductCard";
-import CategoryFilter from "../components/CategoryFilter"
-import ProductSkeleton from "../components/ProductSkeleton";
+import { getProducts } from "../../services/productService";
+import ProductCard from "../../components/features/product/ProductCard";
+import CategoryFilter from "../../components/features/category/CategoryFilter"
+import ProductSkeleton from "../../components/ui/skeleton/ProductSkeleton";
 
-import type { Product } from "../types/Product";
-import styles from "./HomePage.module.css"
-import type { Category } from "../types/Category";
-import { getCategory } from "../services/CategoryService";
+import type { Product } from "../../types/product";
+import styles from "./homePage.module.css"
+import type { Category } from "../../types/category";
+import { getCategory } from "../../services/categoryService";
 
 export default function Home() {
     const [products, setProducts] = useState<Product[]>([]);
